@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Fake News Detection</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<header class="navbar">
+    <div class="brand">TruthCheck</div>
+    <div class="nav-text">AI-Powered News Analysis</div>
+</header>
+
+
+<main class="container">
+
+    <section class="hero">
+
+        <span class="badge">
+            MACHINE LEARNING PROJECT
+        </span>
+
+        <h1>
+            Fake News Detection
+        </h1>
+
+        <p>
+            Enter a news headline or article
+            and let the machine learning model
+            classify the content.
+        </p>
+
+    </section>
+
+
+    <section class="card">
+
+        <form method="POST">
+
+            <label for="news">
+                Enter News
+            </label>
+
+            <textarea
+                id="news"
+                name="news"
+                placeholder="Enter a news headline or article here..."
+                required>{{ request.form.get('news', '') }}</textarea>
+
+            <button type="submit">
+                Check News
+            </button>
+
+        </form>
+
+
+        {% if message %}
+
+        <div class="message">
+            {{ message }}
+        </div>
+
+        {% endif %}
+
+
+        {% if result %}
+
+        <div class="result
+            {% if result == 'REAL NEWS' %}
+                real
+            {% else %}
+                fake
+            {% endif %}
+        ">
+
+            <div class="result-icon">
+
+                {% if result == "REAL NEWS" %}
+                    ✓
+                {% else %}
+                    ×
+                {% endif %}
+
+            </div>
+
+
+            <div>
+
+                <p class="result-label">
+                    Prediction
+                </p>
+
+                <h2>
+                    {{ result }}
+                </h2>
+
+                <p class="confidence">
+                    Model confidence: {{ confidence }}%
+                </p>
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+    </section>
+
+
+    <section class="info-grid">
+
+        <div class="info-card">
+
+            <div class="card-icon">
+                01
+            </div>
+
+            <h3>
+                TF-IDF
+            </h3>
+
+            <p>
+                Converts text into numerical features
+                that can be processed by the machine
+                learning model.
+            </p>
+
+        </div>
+
+
+        <div class="info-card">
+
+            <div class="card-icon">
+                02
+            </div>
+
+            <h3>
+                Logistic Regression
+            </h3>
+
+            <p>
+                Classifies the input into real-news
+                or fake-news categories.
+            </p>
+
+        </div>
+
+
+        <div class="info-card">
+
+            <div class="card-icon">
+                03
+            </div>
+
+            <h3>
+                Flask
+            </h3>
+
+            <p>
+                Connects the Python machine learning
+                model with the web interface.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <p class="disclaimer">
+
+        This is an educational demonstration project.
+        The prediction should not be treated as a definitive
+        fact-check. A real system requires a large,
+        high-quality and verified dataset.
+
+    </p>
+
+</main>
+
+
+<footer>
+
+    <p>
+        Fake News Detection
+        • Python + Flask + Scikit-learn
+    </p>
+
+</footer>
+
+</body>
+</html>
